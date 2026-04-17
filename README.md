@@ -8,5 +8,5 @@ A simple interface for reading texts with links to dictinoaries.
 ## How to adapt dictionaries
 1. Open `reader.js`.
 2. Add, edit or remove dictionaries within the `dictionary` variable at the top.
-3. Each dictionary entry (within `{ }` brackets) contains an `id`, `label`, and `url`. If your dictionary has entries with an address like `https://www.dictionary.com/something/sample-headword`, then you can add a dynamic link as follows: 
+3. Each dictionary entry within `{ }` brackets contains an `id`, `label` and `url`. If your dictionary has entries with addresses like `https://www.dictionary.com/something/sample-headword`, then you can add a dynamic link as follows: 
 `https://www.dictionary.com/something/${word}`
