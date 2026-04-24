@@ -90,7 +90,15 @@ btnGo.addEventListener('click', () => {
     toggleView(true);
 });
 
-btnChangeText.addEventListener('click', () => toggleView(false));
+function clearFrame() {
+    frame.removeAttribute("srcdoc");
+    frame.src = "about:blank";
+}
+
+btnChangeText.addEventListener('click', () => {
+    clearFrame(); 
+    toggleView(false);
+})
 
 function toggleView(isReaderMode) {
     if (isReaderMode) {
