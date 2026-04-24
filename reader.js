@@ -113,18 +113,39 @@ function toggleView(isReaderMode) {
 }
 
 // --- Dictionary Lookup ---
+let selectedWord = null;
+let selectedLemma = null;
+
 textContainer.addEventListener('click', (e) => {
     if (e.target.classList.contains('word')) {
-        const word = e.target.getAttribute('data-word');
+        selectedLemma = e.target.getAttribute('data-word');
+        selectedWord = e.target.textContent; // Store the displayed word
         
         // Get the ID of the currently selected radio button
         const selectedId = document.querySelector('input[name="lang"]:checked').value;
         
         // Find the dictionary object in our array
         const activeDict = dictionaries.find(d => d.id === selectedId);
-        
-        if (activeDict) {
-            frame.src = activeDict.url(word);
-        }
+        renderDictionary(selectedId);
     }
 });
+
+dictContainer.addEventListener('change', (e) => {
+    const selectedId = e.target.value; // Get the newly selected dictionary ID
+    if (selectedWord && selectedLemma) {
+        // If a word is already selected, update the dictionary pane
+        renderDictionary(selectedId);
+    }
+});
+
+// ---Render Dictionaries---
+function renderDictionary(selectedId) {
+    clearFrame()
+
+    const activeDict = dictionaries.find(d => d.id  === selectedId);
+    if (!activeDict || !activeDict.url) {
+        console.error("Níor frítheadh URL an fhoclóra.");
+        return;
+    }
+    frame.src = activeDict.url(selectedLemma);
+}
